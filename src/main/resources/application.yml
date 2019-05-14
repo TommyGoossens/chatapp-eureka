@@ -1,0 +1,33 @@
+## =======================================
+## = JWT Configuration
+## =======================================
+#jwtSecret: jwtSecretKey
+#jwtExpiration: 86400 # -> 1 day
+
+# =======================================
+# = Application Configuration
+# =======================================
+spring:
+  application:
+    name: EurekaServer
+
+# =======================================
+# = Server Configuration
+# =======================================
+server:
+  port: 22500
+
+# =======================================
+# = Eureka Configuration
+# =======================================
+eureka:
+  client:
+    service-url.defaultZone: http://localhost:22500/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 5000
+    enable-self-preservation: false
+  instance:
+    lease-expiration-duration-in-seconds: 3
+    lease-renewal-interval-in-seconds: 1
