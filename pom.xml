@@ -45,6 +45,7 @@
         </dependency>
     </dependencies>
 
+    <!-- Setting up cloud dependencies and version control -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -64,6 +65,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <!-- Plugin required for Continuous integration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
