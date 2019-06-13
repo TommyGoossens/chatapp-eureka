@@ -17,6 +17,11 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <build.number>000</build.number>
+        <commit.hash>local-build</commit.hash>
+        <build.user>local-build</build.user>
+        <build.repo>local-build</build.repo>
+        <circle.workflow>local-build</circle.workflow>
     </properties>
 
     <dependencies>
@@ -76,6 +81,29 @@
                     <forkMode>once</forkMode>
                 </configuration>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>com.google.cloud.tools</groupId>-->
+<!--                <artifactId>jib-maven-plugin</artifactId>-->
+<!--                <version>0.9.7</version>-->
+<!--                <configuration>-->
+<!--                    <to>-->
+<!--                        <image>registry.hub.docker.com/tommygoossens/chatapp-eureka:${version}-b${build.number}</image>-->
+<!--                    </to>-->
+<!--                    <container>-->
+<!--                        <jvmFlags>-->
+<!--                        <jvmFlag>-Dcircle_build_num=${build.number}</jvmFlag>-->
+<!--                        <jvmFlag>-Dcircle_comit=${commit.hash}</jvmFlag>-->
+<!--                        <jvmFlag>-Dcircle_user=${build.user}</jvmFlag>-->
+<!--                        <jvmFlag>-Dcircle_repo=${build.repo}</jvmFlag>-->
+<!--                        <jvmFlag>-Dcircle_workflow_guid=${circle.workflow}</jvmFlag>-->
+<!--                        </jvmFlags>-->
+<!--                        <ports>-->
+<!--                            <port>22500</port>-->
+<!--                        </ports>-->
+<!--                    </container>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

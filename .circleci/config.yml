@@ -21,11 +21,13 @@ jobs:
       - store_artifacts:
           path: target/chatapp-euraka-1.0.1-SNAPSHOT.jar
 
-      - deploy:
-          name: Publish to docker hub
-          command: |
-            docker login -u DOCKER_USERNAME -p DOCKER_PASSWORD
-            docker tag dockerapp_dockerapp $DOCKER_HUB_USER_ID/dockerapp:$CIRCLE_SHA1
-            docker tag dockerapp_dockerapp $DOCKER_HUB_USER_ID/dockerapp:latest
-            docker push DOCKER_USERNAME/dockerapp:$CIRCLE_SHA1
-            docker push DOCKER_USERNAME/dockerapp:latest
+      - setup_remote_docker:
+          docker_layer_caching: true
+            - run:
+                name: Build and push Docker image
+                command: |
+                  . helloworld/bin/activate
+                  pyinstaller -F hello_world.py
+                  docker build -t tommygoossens/chatapp-eureka.
+                  echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
+                  docker push tommygoossens/chatapp-eureka
