@@ -15,8 +15,8 @@ jobs:
           key: chatapp-eureka-{{checksum "pom.xml"}}
       - run: mvn package
 
-#      - store_test_results:
-#          path: target/surefire-reports
-#
-#      - store_artifacts:
-#          path: target/chatapp-euraka-1.0.1-SNAPSHOT.jar
+      - store_test_results:
+          path: target/surefire-reports
+
+      - store_artifacts:
+          path: target/chatapp-euraka-1.0.1-SNAPSHOT.jar
