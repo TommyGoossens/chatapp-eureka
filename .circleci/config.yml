@@ -1,55 +1,22 @@
 version: 2
 jobs:
   build:
-#    working_directory: ~/mern-starter
-    # The primary container is an instance of the first image listed. The job's commands run in this container.
+    working_directory: ~/chatapp-eureka
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-#      - image: circleci/node:4.8.2-jessie
-    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
-#      - image: mongo:3.4.4-jessie
     steps:
       - checkout
-      - run:
-          mvn dependency:go-offline
-#          name: Update npm
-#          command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          key: dependency-cache-{{ checksum "pom.xml" }}
-      - run: mvn package
-#          name: Install npm wee
-#          command: npm install
+          key: chatapp-eureka-{{checksum "pom.xml"}}
+      - run: mvn dependency:go-offline
       - save_cache:
-          key: dependency-cache-{{ checksum "pom.xml" }}
           paths:
-            - node_modules
-  test:
-    docker:
-      - image: circleci/node:4.8.2-jessie
-      - image: mongo:3.4.4-jessie
-    steps:
-      - checkout
-      - run:
-          name: Test
-          command: npm test
-      - run:
-          name: Generate code coverage
-          command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts:
-          path: test-results.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
+            - ~/.m2
+          key: chatapp-eureka-{{checksum "pom.xml"}}
+      - run: mvn package
 
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+      - store_test_results:
+          path: target/surefire-reports
+
+      - store_artifacts:
+          path: target/chatapp-euraka-1.0.1-SNAPSHOT.jar
