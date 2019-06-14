@@ -19,7 +19,7 @@ jobs:
           path: target/surefire-reports
 
       - store_artifacts:
-          path: target/chatapp-euraka-1.0.1-SNAPSHOT.jar
+          path: target/chatapp-euraka-1.0.1-release.jar
 
       - setup_remote_docker:
           docker_layer_caching: true
@@ -27,9 +27,4 @@ jobs:
           name: Build and push Docker image
           command: |
             echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
-            mvn clean compile com.google.cloud.tools:jib-maven-plugin:0.9.7:build -Dimage=tommygoossens/chatapp-eureka
-
-            #            docker build -t tommygoossens/chatapp-eureka .
-            #            docker push tommygoossens/chatapp-eureka
-
-
+            mvn clean compile com.google.cloud.tools:jib-maven-plugin:0.9.7:build -Dimage=tommygoossens/chatapp-eureka:release
